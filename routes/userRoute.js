@@ -1,6 +1,7 @@
 var express = require("express");
 const UserController = require("../controllers/userController")
 const upload = require("../middelware/upload");
+const auth = require("../middelware/auth");
 
 
 
@@ -9,7 +10,7 @@ const UserRoute = express.Router();
 
 
 UserRoute.post("/Create", upload.single("photo"), UserController.createUser);
-UserRoute.get("/List", UserController.listUsers);
+UserRoute.get("/List", auth, UserController.listUsers);
 UserRoute.delete("/Delete/:id", UserController.DeletetUsers);
 UserRoute.get("/GetOne/:id", UserController.FindUser);
 UserRoute.get("/FindOne/:cin", UserController.FindUserByCIN);
